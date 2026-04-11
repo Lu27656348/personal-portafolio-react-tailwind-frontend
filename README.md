@@ -1,43 +1,73 @@
-# 🚀 Portafolio Personal v2.0 | Luis Carlos Somoza
+# React + TypeScript + Vite
 
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Bienvenido al repositorio de la nueva versión de mi portafolio web. Este proyecto nace con el objetivo de elevar la calidad visual y la interactividad de mi presentación profesional, utilizando el ecosistema moderno de React.
+Currently, two official plugins are available:
 
-Puedes ver la versión en vivo aquí: [Link a tu portafolio]
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## 💡 Sobre el proyecto
+## React Compiler
 
-Como Ingeniero Informático, buscaba que mi portafolio no solo mostrara mis proyectos, sino que el portafolio en sí mismo fuera una prueba de buenas prácticas de desarrollo, rendimiento y diseño de interfaces. 
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-Para lograrlo, esta versión deja atrás los diseños estáticos y se apoya fuertemente en animaciones de alto rendimiento y utilidades CSS modernas.
+## Expanding the ESLint configuration
 
-### ✨ Características Principales
-* **Diseño Altamente Responsivo:** Estructurado visualmente con Tailwind CSS para garantizar una adaptabilidad perfecta en cualquier dispositivo.
-* **Animaciones Complejas:** Integración de **GSAP** (GreenSock Animation Platform) para transiciones de página, revelado de elementos al hacer scroll y animaciones de línea de tiempo que aportan dinamismo sin sacrificar el rendimiento.
-* **Componentes Interactivos:** Uso de **React Bits** para acelerar el desarrollo de UI con componentes modulares y altamente estilizados.
-* **Arquitectura Escalable:** Código limpio y modular, preparado para seguir integrando proyectos futuros de manera sencilla.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 🛠️ Stack Tecnológico
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-**Frontend & UI:**
-* React
-* Tailwind CSS
-* GSAP
-* React Bits
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-**Mi Stack Principal (Tecnologías destacadas en el portafolio):**
-* Java & Spring Boot
-* Angular & Next.js
-* Docker & Kubernetes
-* AWS Cloud Services
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-## ⚙️ Instalación y Desarrollo Local
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Si deseas clonar este repositorio para explorarlo localmente, sigue estos pasos:
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-1. Clona el repositorio:
-   ```bash
-   git clone [https://github.com/tu-usuario/tu-repositorio.git](https://github.com/tu-usuario/tu-repositorio.git)
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
