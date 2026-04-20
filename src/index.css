@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --color-primary: #5227FF;
   --color-secondary: #7cff67;
   --color-tertiary: #B19EEF;
+  --font-sans: "Playfair Display", serif;
 }
 
 html {
@@ -12,7 +14,7 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #111827;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Playfair Display", serif;
 }
